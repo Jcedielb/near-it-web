@@ -1,9 +1,8 @@
-// src/theme.js
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    primary: { main: '#3052CC' }, // color azul para selección, encabezados, etc.
+    primary: { main: '#3052CC' }, // color azul para selección, encabezados, etc. este es el azul de figma
     secondary: { main: '#f50057' },
   },
   shape: {

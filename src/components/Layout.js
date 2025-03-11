@@ -1,10 +1,9 @@
-// src/components/Layout.js
 import React, { useState, useRef } from 'react';
 import { Box, IconButton } from '@mui/material';
 import Sidebar from './Sidebar/Sidebar';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import KeyboardDoubleArrowRightOutlined from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
 
-const drawerWidth = 240;
+const drawerWidth = 50;
 
 const Layout = ({ children }) => {
   const [open, setOpen] = useState(true);
@@ -19,7 +18,7 @@ const Layout = ({ children }) => {
   const handleMouseEnter = () => {
     hoverTimerRef.current = setTimeout(() => {
       setOpen(true);
-    }, 2000);
+    }, 600);
   };
 
   const handleMouseLeave = () => {
@@ -67,17 +66,20 @@ const Layout = ({ children }) => {
           sx={(theme) => ({
             position: 'fixed',
             top: theme.spacing(2),
-            left: theme.spacing(0.5),
+            left: theme.spacing(0),
             zIndex: 1300,
             backgroundColor: theme.palette.primary.main,
+            marginLeft: '0px',
+            
+            
             color: theme.palette.common.white,
-            borderRadius: '0 8px 8px 0',
+            borderRadius: '0px 30px 30px 0px',
             '&:hover': {
               backgroundColor: theme.palette.primary.dark,
             },
           })}
         >
-          <ChevronRightIcon />
+          <KeyboardDoubleArrowRightOutlined />
         </IconButton>
       )}
 

@@ -8,7 +8,6 @@ import { ThemeProvider } from '@mui/material/styles';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const container = document.getElementById('root');
 
 root.render(
   <React.StrictMode>
