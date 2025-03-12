@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Home from './pages/home';
 import Alarmas from './pages/alarmas';
 import Grupos from './pages/grupos';
+import NuevaAlarma from './pages/nueva-alarma';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/grupos" element={<Grupos />} />
           <Route path="/alarmas" element={<Alarmas />} />
+          <Route path="/nueva-alarma" element={<NuevaAlarma />} />
+
 
         </Routes>
       </Layout>

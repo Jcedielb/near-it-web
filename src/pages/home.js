@@ -11,9 +11,13 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import NotificationAddOutlined from '@mui/icons-material/NotificationAddOutlined';
-
+import GroupIcon from '@mui/icons-material/Group';
+import PersonIcon from '@mui/icons-material/Person';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+
   return (
     <Box sx={{ width: '100%', p: 3 }}>
       {/* Sección de GRUPOS */}
@@ -57,16 +61,19 @@ const Home = () => {
             &rarr;
           </Typography>
           <IconButton
+            onClick={() => navigate('/nueva-alarma')}
             sx={(theme) => ({
-              marginLeft: 'auto',
+              ml: 'auto',
               backgroundColor: theme.palette.primary.main,
               color: theme.palette.common.white,
               '&:hover': {
                 backgroundColor: theme.palette.primary.dark,
+                borderRadius: '12px',
+
               },
-              height: 50,
-              width: 50,
-              borderRadius: '15px',
+              height: 70,
+              width: 70,
+              borderRadius: '10px',
               mr: 15,
             })}
           >
@@ -78,7 +85,7 @@ const Home = () => {
           Hoy 3 de marzo
         </Typography>
         <AlarmCard group="G1" title="Alarma1" description="Descripción" />
-        <AlarmCard group="G3" title="AlarmaIndividual" description="Descripción" />
+        <AlarmCard group="I3" title="AlarmaIndividual" description="Descripción" />
         <AlarmCard group="G2" title="Alarma2" description="Descripción" sx={{ mb: 2 }} />
 
         <Typography variant="subtitle1" sx={{ mb: 1, mt: 3, fontWeight: 'bold' }}>
@@ -104,8 +111,8 @@ const GroupCard = ({ label, displayName, bgColor }) => {
       <Avatar
         sx={{
           backgroundColor: bgColor || 'primary.main',
-          width: 56,
-          height: 56,
+          width: 80,
+          height: 80,
           mb: 1,
           borderRadius: '12px',
         }}
@@ -128,18 +135,20 @@ const AddGroupCard = () => {
       <Avatar
         sx={(theme) => ({
           backgroundColor: theme.palette.primary.main,
-          width: 56,
-          height: 56,
+          width: 70,
+          height: 70,
           mb: 1,
           borderRadius: '12px',
           cursor: 'pointer',
           '&:hover': {
             backgroundColor: theme.palette.primary.dark,
+            width: 60,
+            height: 60,
           },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          ml: 2.5,
+          ml: 2,
           
         })}
       >
@@ -156,32 +165,76 @@ const AddGroupCard = () => {
  * Tarjeta para representar una alarma.
  * Se han reducido los tamaños de fuente y el padding para que sea más compacta.
  */
-const AlarmCard = ({ group, title, description, sx = {} }) => {
-    return (
-      <Card
-        sx={{
-          mb: 1,
-          backgroundColor: '#1D1B33',
-          borderRadius: '30px',
-          color: '#fff',
-          boxShadow: 1,
-          maxWidth: 800, // Limita el ancho máximo a 300px (ajusta este valor según tu diseño)
-          width: '100%', // Se adapta al 100% del contenedor, pero no excederá maxWidth
-          mx: 'auto', // Centra el componente horizontalmente
-        }}
-      >
-        <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
-          <Typography variant="caption" sx={{ fontWeight: 'bold', mb: 0.3 }}>
-            {group}
-          </Typography>
-          <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 0.3 }}>
-            {title}
-          </Typography>
-          <Typography variant="caption" sx={{ opacity: 0.8 }}>
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
-    );
-  };
+
+
+const AlarmCard = ({
+  group,       // string: p.ej. "G1" o "AlarmaIndividual"
+  title,       // título de la alarma
+  description, // descripción de la alarma
+  sx = {},
+}) => {
+  // Definimos si es grupal o individual. Ajusta la lógica según tu proyecto.
+  // Ejemplo: si el texto empieza con "G", lo consideramos grupo; si no, individual.
+  const isGroup = group?.toLowerCase().startsWith('g');
+
+  return (
+    <Card
+      sx={{
+        mb: 1,
+        backgroundColor: '#2B2B40',
+        borderRadius: '30px 30px 30px 10px',
+        color: '#fff',
+        boxShadow: 1,
+        maxWidth: 800,
+
+        mx: 'auto', // Centra horizontalmente
+        ...sx,
+      }}
+    >
+      <CardContent sx={{ p: 2 }}>
+        {/* Contenedor horizontal */}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          {/* Avatar / círculo con borde */}
+          <Box sx={{ mr: 7 , ml: 1}}>
+            <Avatar
+              sx={{
+                // Ajusta el tamaño del círculo
+                width: 40,
+                height: 40,
+
+                // Color de fondo del círculo (puede ser más oscuro para resaltar el borde)
+                backgroundColor: 'primary.main',
+                // Borde alrededor del círculo
+                border: '2px solid', // Ajusta el color de borde (morado, por ejemplo)
+                // Texto o ícono en blanco
+                color: '#fff',
+              }}
+            >
+              {isGroup ? (
+                // Si es grupo, mostramos el texto del grupo, p.ej. "G1" o un ícono de grupo
+                group.length >= 3 ? group : <GroupIcon />
+              ) : (
+                // Si es individual, mostramos ícono de persona
+                <PersonIcon />
+              )}
+            </Avatar>
+          </Box>
+
+          {/* Contenido de la alarma */}
+          <Box sx={{ flex: 1 }}>
+            <Typography variant="body1" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+              {title}
+            </Typography>
+            <Typography variant="body2" sx={{ opacity: 0.9 }}>
+              {description}
+            </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
+
+
+
   
