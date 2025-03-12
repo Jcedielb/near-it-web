@@ -68,12 +68,12 @@ const Home = () => {
               color: theme.palette.common.white,
               '&:hover': {
                 backgroundColor: theme.palette.primary.dark,
-                borderRadius: '12px',
+                borderRadius: '20px',
 
               },
-              height: 70,
-              width: 70,
-              borderRadius: '10px',
+              height: 80,
+              width: 80,
+              borderRadius: '15px',
               mr: 15,
             })}
           >
@@ -135,20 +135,17 @@ const AddGroupCard = () => {
       <Avatar
         sx={(theme) => ({
           backgroundColor: theme.palette.primary.main,
-          width: 70,
-          height: 70,
+          width: 80,
+          height:80,
           mb: 1,
           borderRadius: '12px',
           cursor: 'pointer',
           '&:hover': {
             backgroundColor: theme.palette.primary.dark,
-            width: 60,
-            height: 60,
           },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          ml: 2,
           
         })}
       >

@@ -3,10 +3,12 @@ import { Drawer, Divider, List, Box } from '@mui/material';
 import HomeOutlined from '@mui/icons-material/HomeOutlined';
 import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
+import NotificationsActiveOutlined from '@mui/icons-material/NotificationsActiveOutlined';
 import SidebarHeader from './SidebarHeader';
 import SidebarItem from './SidebarItem';
 import logo from '../../files/logo.svg';
 import { useNavigate } from 'react-router-dom';
+
 
 const drawerWidth = 240;
 
@@ -45,7 +47,8 @@ const Sidebar = ({ open, selectedIndex, onClose, onSelectItem }) => {
           onClick={() => {
             onSelectItem(0);
             navigate('/Home');
-          }}          
+          }}       
+             
         />
         <SidebarItem
           icon={<GroupsOutlined />}
@@ -57,7 +60,7 @@ const Sidebar = ({ open, selectedIndex, onClose, onSelectItem }) => {
           }}
         />
         <SidebarItem
-          icon={<GroupsOutlined />}
+          icon={<NotificationsActiveOutlined />}
           text="Alarmas grupales"
           selected={selectedIndex === 2}
           onClick={() => {
