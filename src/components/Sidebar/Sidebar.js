@@ -1,9 +1,8 @@
-// src/components/Sidebar/Sidebar.js
 import React from 'react';
 import { Drawer, Divider, List, Box, Typography } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import DeleteIcon from '@mui/icons-material/Delete';
+import HomeOutlined from '@mui/icons-material/HomeOutlined';
+import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
+import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
 import SidebarHeader from './SidebarHeader';
 import SidebarItem from './SidebarItem';
 import { useNavigate } from 'react-router-dom';
@@ -39,30 +38,38 @@ const Sidebar = ({ open, selectedIndex, onClose, onSelectItem }) => {
 
       <List>
         <SidebarItem
-          icon={<HomeIcon />}
+          icon={<HomeOutlined />}
           text="Home"
           selected={selectedIndex === 0}
           onClick={() => {
             onSelectItem(0);
             navigate('/Home');
-          }}
+          }}          
         />
         <SidebarItem
-          icon={<NotificationsIcon />}
-          text="Alarmas grupales"
+          icon={<GroupsOutlined />}
+          text="Grupos"
           selected={selectedIndex === 1}
           onClick={() => {
             onSelectItem(1);
-            // Puedes definir una ruta para esta opción si la tienes
+            navigate('/Grupos'); 
+          }}
+        />
+        <SidebarItem
+          icon={<GroupsOutlined />}
+          text="Alarmas grupales"
+          selected={selectedIndex === 2}
+          onClick={() => {
+            onSelectItem(2);
             navigate('/Alarmas'); 
           }}
         />
         <SidebarItem
-          icon={<DeleteIcon />}
+          icon={<DeleteOutlined />}
           text="Eliminadas"
-          selected={selectedIndex === 2}
+          selected={selectedIndex === 3}
           onClick={() => {
-            onSelectItem(2);
+            onSelectItem(3);
             // Define la ruta correspondiente
             navigate('/');
           }}
@@ -71,26 +78,6 @@ const Sidebar = ({ open, selectedIndex, onClose, onSelectItem }) => {
 
       <Divider />
 
-      <Box sx={{ p: 1 }}>
-        <Typography variant="subtitle2" sx={{ ml: 1, mb: 1, fontWeight: 'bold' }}>
-          Labels
-        </Typography>
-        <List>
-          {[
-            { label: 'Alarmas', route: '/label1' },
-            { label: 'Label 2', route: '/label2' },
-            { label: 'Label 3', route: '/label3' },
-          ].map((item, idx) => (
-            <SidebarItem
-              key={item.label}
-              icon={<HomeIcon />}
-              text={item.label}
-              selected={selectedIndex === idx + 3}
-              onClick={() => handleLabelClick(idx + 3, item.route)}
-            />
-          ))}
-        </List>
-      </Box>
     </Drawer>
   );
 };

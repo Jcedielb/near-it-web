@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Alarmas = () => {
+const Grupos = () => {
   return (
     <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>Alarmas</h1>
+      <h1>Grupos</h1>
     </div>
   );
 };
 
-export default Alarmas;
+export default Grupos;

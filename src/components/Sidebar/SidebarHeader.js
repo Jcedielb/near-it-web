@@ -9,7 +9,18 @@ const SidebarHeader = ({ onClose }) => {
         <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
           UserName
         </Typography>
-        <IconButton onClick={onClose}>
+        <IconButton
+          onClick={onClose}
+          sx={{
+            backgroundColor: 'primary.main',
+            color: 'common.white',
+            borderRadius: '30px 0px 0px 30px',
+            '&:hover': {
+              backgroundColor: 'primary.dark',
+            },
+            marginRight: '-18px',
+          }}
+        >
           <ArrowBackIosNewIcon />
         </IconButton>
       </Box>
