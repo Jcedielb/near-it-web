@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* src/index.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('./files/fondonearitt.png'); /* Ruta relativa desde la carpeta public */
+  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+  background-position: center; /* Centra la imagen en el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  font-family: 'Cabin', sans-serif; /* Asegura que la fuente Cabin se aplique globalmente */
+  background-color: #e9e9e9;
+}
+

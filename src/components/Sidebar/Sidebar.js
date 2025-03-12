@@ -1,10 +1,11 @@
 import React from 'react';
-import { Drawer, Divider, List, Box, Typography } from '@mui/material';
+import { Drawer, Divider, List, Box } from '@mui/material';
 import HomeOutlined from '@mui/icons-material/HomeOutlined';
 import GroupsOutlined from '@mui/icons-material/GroupsOutlined';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
 import SidebarHeader from './SidebarHeader';
 import SidebarItem from './SidebarItem';
+import logo from '../../files/logo.svg';
 import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -77,7 +78,17 @@ const Sidebar = ({ open, selectedIndex, onClose, onSelectItem }) => {
       </List>
 
       <Divider />
+      {/* Contenedor para “empujar” el logo al final */}
+      <Box sx={{ flexGrow: 1 }} />
 
+      {/* Logo al final del sidebar */}
+      <Box sx={{ p: 2, textAlign: 'center' }}>
+        <img 
+          src={logo}
+          alt="App Logo" 
+          style={{ width: '50%', maxWidth: '120px' }}
+        />
+      </Box>
     </Drawer>
   );
 };

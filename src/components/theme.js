@@ -1,15 +1,20 @@
 import { createTheme } from '@mui/material/styles';
+import '@fontsource/cabin'; // Importa la fuente "Cabin"
+
 
 const theme = createTheme({
   palette: {
-    primary: { main: '#3052CC' }, // color azul para selección, encabezados, etc. este es el azul de figma
+    primary: { main: '#3052CC' }, // color azul para selección, encabezados, etc. (azul de Figma)
     secondary: { main: '#f50057' },
   },
+  typography: {
+    fontFamily: 'Cabin, sans-serif', // Fuente global para toda la app
+  },
   shape: {
-    borderRadius: 12, // curvatura general para componentes
+    borderRadius: 12, // Curvatura general para componentes
   },
   components: {
-    // Puedes sobreescribir estilos de componentes específicos aquí.
+    // Sobrescribe estilos de componentes específicos
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -28,3 +33,4 @@ const theme = createTheme({
 });
 
 export default theme;
+
