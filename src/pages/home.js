@@ -130,8 +130,10 @@ const GroupCard = ({ label, displayName, bgColor }) => {
  * Botón para agregar un grupo, con la misma apariencia que los GroupCard.
  */
 const AddGroupCard = () => {
+  const navigate = useNavigate();
+
   return (
-    <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }} onClick={() => navigate('/nuevo-grupo')}>
       <Avatar
         sx={(theme) => ({
           backgroundColor: theme.palette.primary.main,
