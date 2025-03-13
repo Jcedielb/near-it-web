@@ -16,6 +16,9 @@ import {
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const NuevaAlarma = () => {
   const [titulo, setTitulo] = useState('');
@@ -37,6 +40,18 @@ const NuevaAlarma = () => {
     { id: 'i3', nombre: 'Integrante 3' },
   ];
 
+  // Definir hook de navegación y estado para Snackbar
+  const navigate = useNavigate();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+    navigate('/alarmas');
+  };
+
   // Maneja el cambio en el select de integrantes
   const handleIntegrantesChange = (event) => {
     const {
@@ -56,32 +71,41 @@ const NuevaAlarma = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      titulo,
-      descripcion,
-      fechaHora,
-      grupoSeleccionado,
-      integrantesSeleccionados,
-    });
+    if (
+      titulo.trim() !== '' &&
+      descripcion.trim() !== '' &&
+      fechaHora &&
+      grupoSeleccionado.trim() !== '' &&
+      integrantesSeleccionados.length > 0
+    ) {
+      console.log({
+        titulo,
+        descripcion,
+        fechaHora,
+        grupoSeleccionado,
+        integrantesSeleccionados,
+      });
+      setOpenSnackbar(true); // Muestra el mensaje de confirmación
+    } else {
+      alert('Por favor, completa todos los campos requeridos.');
+    }
   };
 
   return (
     <Box
       sx={{
-        maxWidth: 400,
+        maxWidth: 350,
         mx: 'auto',
-        mt: 4,
         p: 10,
         backgroundColor: 'background.paper',
-        borderRadius: '15px 50px 50px 50px',
+        borderRadius: '30px 30px 10px 30px',
         boxShadow: 3,
-
       }}
     >
       <Typography variant="h4" sx={{ mb: 5, textAlign: 'center', color: 'primary.main' }}>
         Crear alarma grupal
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {/* Título */}
         <TextField
           label="Título de la alarma"
@@ -94,12 +118,13 @@ const NuevaAlarma = () => {
 
         {/* Descripción */}
         <TextField
-          label="Descripción: Detalla datos relevantes (Ubicación, motivo, etc.)"
+          label="Descripción"
+          helperText="Detalla datos relevantes (Ubicación, motivo, etc.)"
           variant="outlined"
           fullWidth
           multiline
           required
-          rows={3}
+          rows={2}
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
         />
@@ -125,7 +150,7 @@ const NuevaAlarma = () => {
         {/* Selección de Integrantes (Multi-select) */}
         <FormControl fullWidth disabled={!grupoSeleccionado}>
           <InputLabel id="integrantes-label">
-            {grupoSeleccionado ? "Integrantes" : "Escoge el grupo al cual quieres asignarle la alarma"}
+            {grupoSeleccionado ? "Integrantes" : "Selecciona un grupo para ver los integrantes"}
           </InputLabel>
           <Select
             labelId="integrantes-label"
@@ -176,7 +201,6 @@ const NuevaAlarma = () => {
             height: 58,
             width: '50%',
             alignSelf: 'center',
-
             mt: 2,
             backgroundColor: 'primary.main',
             color: 'common.white',
@@ -190,6 +214,23 @@ const NuevaAlarma = () => {
           Crear Alarma
         </Button>
       </Box>
+
+      {/* Snackbar para mensaje de confirmación */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          Alarma creada exitosamente
+        </MuiAlert>
+      </Snackbar>
     </Box>
   );
 };
