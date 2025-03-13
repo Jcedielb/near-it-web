@@ -6,6 +6,7 @@ import Home from './pages/home';
 import Alarmas from './pages/alarmas';
 import Grupos from './pages/grupos';
 import NuevaAlarma from './pages/nueva-alarma';
+import NuevoGrupo from './pages/nuevo-grupo';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/grupos" element={<Grupos />} />
           <Route path="/alarmas" element={<Alarmas />} />
           <Route path="/nueva-alarma" element={<NuevaAlarma />} />
+          <Route path="/nuevo-grupo" element={<NuevoGrupo/>} />
 
 
         </Routes>
