@@ -1,4 +1,3 @@
-// src/pages/nuevo-grupo.js
 import React, { useState, useEffect } from 'react';
 import {
   Box,
@@ -13,6 +12,8 @@ import {
   Checkbox,
   ListItemText,
   IconButton,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -25,6 +26,7 @@ const NuevoGrupo = () => {
   const [integrantesSeleccionados, setIntegrantesSeleccionados] = useState([]);
   const [imagen, setImagen] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
   // Datos de ejemplo para categorías e integrantes
@@ -57,6 +59,10 @@ const NuevoGrupo = () => {
       integrantesSeleccionados,
       imagen,
     });
+    setOpenSnackbar(true);
+    setTimeout(() => {
+      navigate('/');
+    }, 2000); // Redirige después de 2 segundos
   };
 
   const handleImageChange = (e) => {
@@ -251,6 +257,17 @@ const NuevoGrupo = () => {
           </Box>
         </Box>
       </Box>
+
+      {/* Snackbar para mostrar el mensaje de "grupo creado" */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={2000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: '100%' }}>
+          Grupo creado
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
